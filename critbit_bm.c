@@ -11,7 +11,7 @@
 #define REP(i,n) for(int i=0;i<n;i++)
 
 void f(char **key, int m) {
-  critbit0_tree tr[1] = {0};
+  critbit0_tree tr[1] = {{0}};
 
   int count = 0;
   bm_init();

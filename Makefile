@@ -1,13 +1,29 @@
 CFLAGS=--std=gnu99 -Wall -O3
+CXXFLAGS=--std=gnu++11 -Wall -O3
+LDFLAGS=-ltcmalloc
 
 blt_test: blt_test.c blt.c
 
 blt_bm: blt_bm.c blt.c bm.c
-	$(CC) $(CFLAGS) -o $@ $^ -ltcmalloc
+	$(CC) $(CFLAGS) -o $@ $^
 
 cbt_bm: cbt_bm.c cbt.c bm.c
-	$(CC) $(CFLAGS) -o $@ $^ -ltcmalloc
+	$(CC) $(CFLAGS) -o $@ $^
 
-push:
-	git push git@github.com:blynn/blt.git master
-	git push https://code.google.com/p/blynn-blt/ master
+map_bm: map_bm.cc
+	$(CXX) $(CXXFLAGS) -o $@ $^
+
+umap_bm: umap_bm.cc
+	$(CXX) $(CXXFLAGS) -o $@ $^
+
+critbit.h: critbit/critbit.h
+	sed 's/\s*extern.*//;s/\s*};//' $^ >$@
+
+critbit_bm: critbit_bm.c critbit/critbit.c critbit.h bm.c
+	$(CC) $(CFLAGS) -o $@ critbit_bm.c critbit/critbit.c bm.c
+
+benchmark: blt_bm cbt_bm map_bm umap_bm critbit_bm
+	./benchmark
+
+clean:
+	rm -f critbit.h *_bm *.csv

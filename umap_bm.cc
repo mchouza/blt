@@ -1,11 +1,11 @@
-// Benchmarks map<string, int>.
+// Benchmarks unordered_map<string, int>.
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
 
-#include <map>
+#include <unordered_map>
 #include <string>
 #include <vector>
 
@@ -49,23 +49,23 @@ int main() {
     key[j] = tmp;
   }
 
-  map<string, int> smap;
+  unordered_map<string, int> smap;
 
   bm_init();
   REP(i, m) smap[key[i]] = i;
-  bm_report("map insert");
+  bm_report("unordered_map insert");
   REP(i, m) if (i != smap[key[i]]) {
     fprintf(stderr, "BUG!\n");
     exit(1);
   }
-  bm_report("map get");
+  bm_report("unordered_map get");
   int count = 0;
-  for (map<string, int>::iterator it = smap.begin(); it != smap.end(); it++) count++;
+  for (unordered_map<string, int>::iterator it = smap.begin(); it != smap.end(); it++) count++;
   if (count != m) {
     fprintf(stderr, "BUG!\n");
     exit(1);
   }
-  bm_report("map iterate");
+  bm_report("unordered_map iterate");
   smap.clear();
-  bm_report("map delete");
+  bm_report("unordered_map delete");
 }
