@@ -13,7 +13,7 @@ seq2M() {
 
 for cmd in dict seq2M; do
   first=1
-  for bm in blt_bm cbt_bm critbit_bm map_bm umap_bm; do
+  for bm in blt_bm cbt_bm critbit_bm map_bm umap_bm mfcb_bm; do
     for n in `seq 10`; do
       if [[ $n -eq 1 ]]; then 
         echo heading, $bm > /tmp/output.col.$bm

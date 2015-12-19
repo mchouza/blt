@@ -22,10 +22,13 @@ critbit.h: critbit/critbit.h
 critbit_bm: critbit_bm.c critbit/critbit.c critbit.h bm.c
 	$(CC) $(CFLAGS) -o $@ critbit_bm.c critbit/critbit.c bm.c
 
-benchmark: blt_bm cbt_bm map_bm umap_bm critbit_bm
+mfcb_bm: mfcb_bm.c pcb/mfcb/mfcb.c pcb/mfcb/mfcb.h bm.c
+	$(CC) $(CFLAGS) -I pcb/mfcb -o $@ mfcb_bm.c pcb/mfcb/mfcb.c bm.c
+
+benchmark: blt_bm cbt_bm map_bm umap_bm critbit_bm mfcb_bm
 	./benchmark
 
 clean:
-	rm -f critbit.h *_bm *.csv benchmark
+	rm -f critbit.h *_bm *.csv
 
 .PHONY: benchmark
