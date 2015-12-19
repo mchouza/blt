@@ -1,3 +1,6 @@
 [submodule "critbit"]
 	path = critbit
 	url = https://github.com/agl/critbit.git
+[submodule "pcb"]
+	path = pcb
+	url = https://github.com/mchouza/pcb.git

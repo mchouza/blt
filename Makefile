@@ -26,4 +26,6 @@ benchmark: blt_bm cbt_bm map_bm umap_bm critbit_bm
 	./benchmark
 
 clean:
-	rm -f critbit.h *_bm *.csv
+	rm -f critbit.h *_bm *.csv benchmark
+
+.PHONY: benchmark
