@@ -21,6 +21,13 @@ void f(char **key, int m) {
     exit(1);
   }
   bm_report("MFCB get");
+  for (const char *it = mfcb_find(&cbt, ""); it; it = mfcb_find(&cbt, it)) count++;
+  if (count != m) {
+    fprintf(stderr, "BUG!\n");
+    exit(1);
+  }
+  bm_report("MFCB iterate");
+  count = 0;
   int inc(const char* ignore0, void* ignore1) {
     count++;
     return 1;
